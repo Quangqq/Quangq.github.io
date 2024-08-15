@@ -1,3 +1,5 @@
+const playButton = document.getElementById('playButton');
+const gameContainer = document.getElementById('gameContainer');
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -5,15 +7,24 @@ const gridSize = 20;
 canvas.width = 400;
 canvas.height = 400;
 
-let snake = [
-    { x: gridSize * 5, y: gridSize * 5 },
-    { x: gridSize * 4, y: gridSize * 5 },
-    { x: gridSize * 3, y: gridSize * 5 }
-];
+let snake = [];
+let food;
+let direction;
+let changingDirection;
 
-let food = { x: gridSize * 10, y: gridSize * 10 };
-let direction = { x: gridSize, y: 0 };
-let changingDirection = false;
+function startGame() {
+    snake = [
+        { x: gridSize * 5, y: gridSize * 5 },
+        { x: gridSize * 4, y: gridSize * 5 },
+        { x: gridSize * 3, y: gridSize * 5 }
+    ];
+    direction = { x: gridSize, y: 0 };
+    changingDirection = false;
+
+    createFood();
+    gameContainer.style.display = 'block';
+    main();
+}
 
 function drawSnakePart(snakePart) {
     ctx.fillStyle = '#00FF00';
@@ -102,6 +113,5 @@ function main() {
     }, 100);
 }
 
+playButton.addEventListener('click', startGame);
 document.addEventListener("keydown", changeDirection);
-createFood();
-main();
