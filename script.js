@@ -14,8 +14,8 @@ canvas.height = 400;
 
 let snake = [];
 let food;
-let direction;
-let changingDirection;
+let direction = { x: gridSize, y: 0 };
+let changingDirection = false;
 
 function startGame() {
     snake = [
@@ -50,48 +50,22 @@ function moveSnake() {
     }
 }
 
-function changeDirection(event) {
-    if (changingDirection) return;
-    changingDirection = true;
-
-    const keyPressed = event.keyCode;
-    const goingUp = direction.y === -gridSize;
-    const goingDown = direction.y === gridSize;
-    const goingRight = direction.x === gridSize;
-    const goingLeft = direction.x === -gridSize;
-
-    if (keyPressed === 37 && !goingRight) {
-        direction = { x: -gridSize, y: 0 };
-    } else if (keyPressed === 38 && !goingDown) {
-        direction = { x: 0, y: -gridSize };
-    } else if (keyPressed === 39 && !goingLeft) {
-        direction = { x: gridSize, y: 0 };
-    } else if (keyPressed === 40 && !goingUp) {
-        direction = { x: 0, y: gridSize };
-    }
-}
-
 function buttonDirection(directionInput) {
     if (changingDirection) return;
     changingDirection = true;
 
-    const goingUp = direction.y === -gridSize;
-    const goingDown = direction.y === gridSize;
-    const goingRight = direction.x === gridSize;
-    const goingLeft = direction.x === -gridSize;
-
     switch(directionInput) {
         case 'left':
-            if (!goingRight) direction = { x: -gridSize, y: 0 };
+            if (direction.x === 0) direction = { x: -gridSize, y: 0 };
             break;
         case 'up':
-            if (!goingDown) direction = { x: 0, y: -gridSize };
+            if (direction.y === 0) direction = { x: 0, y: -gridSize };
             break;
         case 'right':
-            if (!goingLeft) direction = { x: gridSize, y: 0 };
+            if (direction.x === 0) direction = { x: gridSize, y: 0 };
             break;
         case 'down':
-            if (!goingUp) direction = { x: 0, y: gridSize };
+            if (direction.y === 0) direction = { x: 0, y: gridSize };
             break;
     }
 }
