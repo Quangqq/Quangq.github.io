@@ -146,7 +146,7 @@ function main() {
 playButton.addEventListener('click', startGame);
 document.addEventListener("keydown", changeDirection);
 
-upButton.addEventListener('click', () => buttonDirection('lp'));
+upButton.addEventListener('click', () => buttonDirection('up'));
 downButton.addEventListener('click', () => buttonDirection('down'));
 leftButton.addEventListener('click', () => buttonDirection('left'));
 rightButton.addEventListener('click', () => buttonDirection('right'));
