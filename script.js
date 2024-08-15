@@ -71,7 +71,7 @@ function changeDirection(event) {
     }
 }
 
-function buttonDirection(buttonDirection) {
+function buttonDirection(directionInput) {
     if (changingDirection) return;
     changingDirection = true;
 
@@ -80,14 +80,19 @@ function buttonDirection(buttonDirection) {
     const goingRight = direction.x === gridSize;
     const goingLeft = direction.x === -gridSize;
 
-    if (buttonDirection === 'left' && !goingRight) {
-        direction = { x: -gridSize, y: 0 };
-    } else if (buttonDirection === 'up' && !goingDown) {
-        direction = { x: 0, y: -gridSize };
-    } else if (buttonDirection === 'right' && !goingLeft) {
-        direction = { x: gridSize, y: 0 };
-    } else if (buttonDirection === 'down' && !goingUp) {
-        direction = { x: 0, y: gridSize };
+    switch(directionInput) {
+        case 'left':
+            if (!goingRight) direction = { x: -gridSize, y: 0 };
+            break;
+        case 'up':
+            if (!goingDown) direction = { x: 0, y: -gridSize };
+            break;
+        case 'right':
+            if (!goingLeft) direction = { x: gridSize, y: 0 };
+            break;
+        case 'down':
+            if (!goingUp) direction = { x: 0, y: gridSize };
+            break;
     }
 }
 
