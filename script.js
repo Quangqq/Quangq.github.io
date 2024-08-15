@@ -3,6 +3,11 @@ const gameContainer = document.getElementById('gameContainer');
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
+const upButton = document.getElementById('upButton');
+const downButton = document.getElementById('downButton');
+const leftButton = document.getElementById('leftButton');
+const rightButton = document.getElementById('rightButton');
+
 const gridSize = 20;
 canvas.width = 400;
 canvas.height = 400;
@@ -66,6 +71,26 @@ function changeDirection(event) {
     }
 }
 
+function buttonDirection(buttonDirection) {
+    if (changingDirection) return;
+    changingDirection = true;
+
+    const goingUp = direction.y === -gridSize;
+    const goingDown = direction.y === gridSize;
+    const goingRight = direction.x === gridSize;
+    const goingLeft = direction.x === -gridSize;
+
+    if (buttonDirection === 'left' && !goingRight) {
+        direction = { x: -gridSize, y: 0 };
+    } else if (buttonDirection === 'up' && !goingDown) {
+        direction = { x: 0, y: -gridSize };
+    } else if (buttonDirection === 'right' && !goingLeft) {
+        direction = { x: gridSize, y: 0 };
+    } else if (buttonDirection === 'down' && !goingUp) {
+        direction = { x: 0, y: gridSize };
+    }
+}
+
 function createFood() {
     food = {
         x: Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize,
@@ -115,3 +140,8 @@ function main() {
 
 playButton.addEventListener('click', startGame);
 document.addEventListener("keydown", changeDirection);
+
+upButton.addEventListener('click', () => buttonDirection('up'));
+downButton.addEventListener('click', () => buttonDirection('down'));
+leftButton.addEventListener('click', () => buttonDirection('left'));
+rightButton.addEventListener('click', () => buttonDirection('right'));
