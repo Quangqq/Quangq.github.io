@@ -3,21 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Cron Job Service</title>
+    <title>Snake Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Free Cron Job Service</h1>
-    <form id="cron-form">
-        <label for="command">Command:</label>
-        <input type="text" id="command" name="command" required>
-        
-        <label for="schedule">Schedule (cron format):</label>
-        <input type="text" id="schedule" name="schedule" placeholder="e.g., * * * * *" required>
-        
-        <button type="submit">Create Cron Job</button>
-    </form>
-
-    <script src="app.js"></script>
+    <h1>Snake Game</h1>
+    <canvas id="gameCanvas"></canvas>
+    <script src="script.js"></script>
 </body>
 </html>
