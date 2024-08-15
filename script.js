@@ -16,6 +16,7 @@ let snake = [];
 let food;
 let direction = { x: gridSize, y: 0 };
 let changingDirection = false;
+let score = 0;
 
 function startGame() {
     snake = [
@@ -25,6 +26,7 @@ function startGame() {
     ];
     direction = { x: gridSize, y: 0 };
     changingDirection = false;
+    score = 0;
 
     createFood();
     gameContainer.style.display = 'block';
@@ -45,6 +47,7 @@ function moveSnake() {
     snake.unshift(head);
     if (head.x === food.x && head.y === food.y) {
         createFood();
+        score++;
     } else {
         snake.pop();
     }
@@ -82,6 +85,12 @@ function drawFood() {
     ctx.fillRect(food.x, food.y, gridSize, gridSize);
 }
 
+function drawScore() {
+    ctx.fillStyle = 'white';
+    ctx.font = '20px Arial';
+    ctx.fillText('Score: ' + score, 10, 20);
+}
+
 function gameOver() {
     for (let i = 4; i < snake.length; i++) {
         if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
@@ -102,7 +111,7 @@ function clearCanvas() {
 
 function main() {
     if (gameOver()) {
-        alert("Game Over!");
+        alert("Game Over! Your score was " + score);
         document.location.reload();
         return;
     }
@@ -113,6 +122,7 @@ function main() {
         drawFood();
         moveSnake();
         drawSnake();
+        drawScore();
         main();
     }, 100);
 }
